@@ -6,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using Core.DataAccess.Abstracts;
 using Core.Entities.Abstracts;
-using Core.Utilities.Messages;
 using Core.Utilities.Results.Abstracts;
 using Core.Utilities.Results.Concretes;
 using Microsoft.EntityFrameworkCore;
@@ -51,7 +50,7 @@ namespace Core.DataAccess.Concretes
             }
         }
 
-        public TEntity GetById(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext context = new TContext())
             {

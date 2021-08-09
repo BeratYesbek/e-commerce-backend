@@ -16,7 +16,7 @@ namespace Core.DataAccess.Abstracts
 
         void Delete(T entity);
 
-        T GetById(Expression<Func<T, bool>> filter);
+        T Get(Expression<Func<T, bool>> filter);
 
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
     }

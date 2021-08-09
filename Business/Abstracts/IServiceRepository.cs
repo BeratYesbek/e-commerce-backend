@@ -16,8 +16,8 @@ namespace Business.Abstracts
 
         IResult Delete(T entity);
 
-        IDataResult<T> GetById(Expression<Func<T, bool>> filter);
+        IDataResult<T> GetById(int id);
 
-        IDataResult<List<T>> GetAll(Expression<Func<T, bool>> filter = null);
+        IDataResult<List<T>> GetAll();
     }
 }

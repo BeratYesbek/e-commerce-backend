@@ -42,15 +42,15 @@ namespace Business.Concretes
             return new SuccessResult(CategoryMessages.CategoryDeleteSuccessMessage);
         }
 
-        public IDataResult<Category> GetById(Expression<Func<Category, bool>> filter)
+        public IDataResult<Category> GetById(int id)
         {
-            var result = _categoryDal.GetById(filter);
+            var result = _categoryDal.Get(c => c.CategoryId == id);
             return new SuccessDataResult<Category>(result);
         }
 
-        public IDataResult<List<Category>> GetAll(Expression<Func<Category, bool>> filter = null)
+        public IDataResult<List<Category>> GetAll()
         {
-            var result = _categoryDal.GetAll(filter);
+            var result = _categoryDal.GetAll();
             return new SuccessDataResult<List<Category>>(result);
         }
     }
