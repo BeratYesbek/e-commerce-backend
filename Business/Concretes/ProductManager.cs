@@ -13,6 +13,7 @@ using Core.Utilities.Results.Abstracts;
 using Core.Utilities.Results.Concretes;
 using DataAccess.Abstracts;
 using Entity.Concretes;
+using Entity.Concretes.Dtos;
 
 namespace Business.Concretes
 {
@@ -70,5 +71,28 @@ namespace Business.Concretes
             var result = _productDal.GetAll();
             return new SuccessDataResult<List<Product>>(result);
         }
+
+        public IDataResult<List<ProductDto>> GetAllProductDetail()
+        {
+            var result = _productDal.GetAllProductDetail();
+            if (result.Count > 0)
+            {
+                return new SuccessDataResult<List<ProductDto>>(result);
+
+            }
+            return new ErrorDataResult<List<ProductDto>>(result);   
+        }
+
+        public IDataResult<ProductDto> GetProductDetailById(int id)
+        {
+            var result = _productDal.GetProductDetailById(p => p.ProductId == id);
+            if (result != null)
+            {
+                return new SuccessDataResult<ProductDto>(result);
+            }
+            return new ErrorDataResult<ProductDto>(null);
+        }
+                        
+        
     }
 }

@@ -46,5 +46,26 @@ namespace WebApi.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpGet("getAllProductDetail")]
+        public IActionResult GetAllProductDetail()
+        {
+            var result = _productService.GetAllProductDetail();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result); 
+        }
+        [HttpGet("getProductDetailById")]
+        public IActionResult GetProductDetailById(int id)
+        {
+            var result = _productService.GetProductDetailById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

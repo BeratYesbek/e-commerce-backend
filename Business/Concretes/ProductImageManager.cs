@@ -24,11 +24,16 @@ namespace Business.Concretes
         {
             for (int i = 0; i < file.Length; i++)
             {
-                var result = FileHelper.Upload(file[i], new FileType(FileExtensions.ImageExtensions));
+                var result = FileHelper.Upload(file[i]);
                 if (result.Success)
                 {
+                    entity.Id = 0;
                     entity.ImagePath = result.Message;
                     _productImageDal.Add(entity);
+                }
+                else
+                {
+                    return result;
                 }
   
 
@@ -41,7 +46,7 @@ namespace Business.Concretes
         {
             for (int i = 0; i < file.Length; i++)
             {
-                var result = FileHelper.Update(file[i], entity[i].ImagePath, new FileType(FileExtensions.ImageExtensions));
+                var result = FileHelper.Update(file[i],entity[i].ImagePath);
                 if (result.Success)
                 {
                     entity[i].ImagePath = result.Message;

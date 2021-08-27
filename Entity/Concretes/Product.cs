@@ -13,5 +13,8 @@ namespace Entity.Concretes
         public int ProductPrice { get; set; }
         public int ProductQuantity { get; set; }
         public int CategoryId { get; set; }
+        public int BrandId { get; set; }
+        public int ColorId { get; set; }
+
     }
 }
