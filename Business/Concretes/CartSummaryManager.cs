@@ -4,6 +4,7 @@ using Core.Utilities.Results.Abstracts;
 using Core.Utilities.Results.Concretes;
 using DataAccess.Abstracts;
 using Entity.Concretes;
+using Entity.Concretes.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -56,5 +57,17 @@ namespace Business.Concretes
             _cartSummaryDal.Update(entity);
             return new SuccessResult(CartSummaryMessages.CartSummaryUpdateSuccessMessage);
         }
+
+        public IDataResult<List<CartSummaryDto>> GetCartSummaryDetailByUserId(int userId)
+        {
+            var result = _cartSummaryDal.GetCartSummaryDetailByUserId(c => c.UserId == userId);
+            if (result.Count > 0)
+            {
+                return new SuccessDataResult<List<CartSummaryDto>>(result);
+            }
+
+            return new ErrorDataResult<List<CartSummaryDto>>(null);     
+        }
+
     }
 }

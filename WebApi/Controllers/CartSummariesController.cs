@@ -81,5 +81,17 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getCartSummaryDetailByUserId")]
+        public IActionResult GetCartSummaryDetailByUserId(int userId)
+        {
+            var result = _cartSummaryService.GetCartSummaryDetailByUserId(userId);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }
