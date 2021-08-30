@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Core.DataAccess;
 using Core.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Business.BusinessMailer;
 
 namespace WebApi
 {

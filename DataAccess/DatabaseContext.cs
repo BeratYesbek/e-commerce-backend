@@ -20,6 +20,7 @@ namespace DataAccess
         public DbSet<Color> Colors { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<CartSummary> CartSummaries { get; set; }
         public DbSet<ProductImage> ProductImages  { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
