@@ -54,7 +54,7 @@ namespace Business.Concretes
                 return new ErrorDataResult<User>(UserMessages.UserLoginErrorMessage, null);
             }
 
-            if (!HashingHelper.verifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
             {
                 return new ErrorDataResult<User>(UserMessages.UserLoginErrorMessage, null);
             }
@@ -76,6 +76,10 @@ namespace Business.Concretes
         {
             var claims = _userService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user, claims);
+            accessToken.user = user;
+            accessToken.user.PasswordHash = null;
+            accessToken.user.PasswordSalt = null;
+       
             return new SuccessDataResult<AccessToken>(accessToken);
         }
     }

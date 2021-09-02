@@ -1,5 +1,7 @@
 ﻿using Business.Abstracts;
+using Business.CustomBusinessRules;
 using Business.Messages;
+using Core.Utilities.Business;
 using Core.Utilities.Results.Abstracts;
 using Core.Utilities.Results.Concretes;
 using DataAccess.Abstracts;
@@ -27,6 +29,10 @@ namespace Business.Concretes
             cartSummary.UserId = entity.UserId;
             cartSummary.Id = entity.CartSummaryId;
             _cartSummaryService.Delete(cartSummary);
+
+
+            BusinessRules.run(CustomPaymentRules.SendPurchaseMail(entity));
+
             return new SuccessResult(PaymentMessages.PaymentAddSuccessMessage);
         }
 

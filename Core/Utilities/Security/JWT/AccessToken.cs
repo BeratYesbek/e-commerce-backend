@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concretes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,5 +10,7 @@ namespace Core.Utilities.Security.JWT
         public string Token { get; set; }
 
         public DateTime Expiration { get; set; }
+
+        public User user { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Business.Abstracts
 
         IDataResult<List<ProductDto>> GetAllProductDetail();
         IDataResult<ProductDto> GetProductDetailById(int id);
-
+        IDataResult<List<ProductDto>> GetProductDetailByCategoryId(int categoryId);
     }
 }
     

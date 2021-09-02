@@ -53,7 +53,15 @@ namespace Business.Concretes
 
         public IDataResult<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            var user = _userDal.Get(u => u.UserId == id);
+            if (user != null)
+            {
+                user.PasswordHash = null;
+                user.PasswordSalt = null;
+                return new SuccessDataResult<User>(user);
+            }
+            return new ErrorDataResult<User>(null);
+
         }
 
         public IDataResult<List<User>> GetAll()

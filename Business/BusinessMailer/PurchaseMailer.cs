@@ -18,13 +18,13 @@ namespace Business.BusinessMailer
 
         private static readonly string subject = "Thank you for your payment";
 
-        public static async void SendPurchaseMail(Payment[] payment)
+        public static async void SendPurchaseMail(Payment payment)
         {
-            var _email = Mailer.StartMailer(subject, payment[0].Email).
-                UsingTemplateFromFile($"{_currentDirectory.Replace("\\","/")+"/"+_folderName+"/"+purchaseHtmlPage}", payment);    
-           await _email.SendAsync();
+            var _email = Mailer.StartMailer(subject, payment.Email).
+                UsingTemplateFromFile($"{_currentDirectory.Replace("\\", "/") + "/" + _folderName + "/" + purchaseHtmlPage}", new { address = payment.Address, name = payment.CardHolderName, price = payment.TotalPrice });
+            await _email.SendAsync();
         }
 
-       
+
     }
 }

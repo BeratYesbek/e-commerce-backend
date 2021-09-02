@@ -28,7 +28,7 @@ namespace Business.Concretes
 
         [CacheRemoveAspect("IServiceRepository.ProductManager.GetById")]
         [ValidationAspect(typeof(ProductValidator))]
-        //[SecuredOperation("Product.Add,admin")]
+        [SecuredOperation("Product.Add,admin")]
         [PerformanceAspect(3)]
         public IResult Add(Product entity)
         {
@@ -66,6 +66,7 @@ namespace Business.Concretes
 
         [CacheAspect]
         [PerformanceAspect(3)]
+        [SecuredOperation("product.get,admin")]
         public IDataResult<List<Product>> GetAll()
         {
             var result = _productDal.GetAll();
@@ -92,7 +93,15 @@ namespace Business.Concretes
             }
             return new ErrorDataResult<ProductDto>(null);
         }
-                        
-        
+
+        public IDataResult<List<ProductDto>> GetProductDetailByCategoryId(int categoryId)
+        {
+            var result = _productDal.GetAllProductDetail(c => c.CategoryId == categoryId);
+            if (result.Count > 0)
+            {
+                return new SuccessDataResult<List<ProductDto>>(result);
+            }
+            return new ErrorDataResult<List<ProductDto>>(result);       
+        }
     }
 }
