@@ -28,7 +28,7 @@ namespace Business.Concretes
 
         [CacheRemoveAspect("IServiceRepository.ProductManager.GetById")]
         [ValidationAspect(typeof(ProductValidator))]
-        [SecuredOperation("Product.Add,admin")]
+        [SecuredOperation("product.add,admin")]
         [PerformanceAspect(3)]
         public IResult Add(Product entity)
         {
