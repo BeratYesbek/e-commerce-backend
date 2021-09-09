@@ -66,8 +66,18 @@ namespace Business.Concretes
                 return new SuccessDataResult<List<CartSummaryDto>>(result);
             }
 
-            return new ErrorDataResult<List<CartSummaryDto>>(null);     
+            return new ErrorDataResult<List<CartSummaryDto>>(null);
         }
 
+        public IDataResult<List<CartSummary>> GetAllByUserId(int userId)
+        {
+            var result = _cartSummaryDal.GetAll(c => c.UserId == userId);
+            if (result.Count > 0)
+            {
+                return new SuccessDataResult<List<CartSummary>>(result);
+            }
+            return new ErrorDataResult<List<CartSummary>>(null);
+
+        }
     }
 }

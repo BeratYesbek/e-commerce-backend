@@ -41,11 +41,25 @@ namespace WebApi.Controllers
 
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
 
             return BadRequest(result);
         }
+        [HttpGet("getById")]
+        public IActionResult GetById(int id)
+        {
+            var result = _productService.GetById(id);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+
 
         [HttpGet("getAllProductDetail")]
         public IActionResult GetAllProductDetail()

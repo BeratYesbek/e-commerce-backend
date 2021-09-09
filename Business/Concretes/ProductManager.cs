@@ -66,7 +66,7 @@ namespace Business.Concretes
 
         [CacheAspect]
         [PerformanceAspect(3)]
-        [SecuredOperation("product.get,admin")]
+        //[SecuredOperation("product.get,admin")]
         public IDataResult<List<Product>> GetAll()
         {
             var result = _productDal.GetAll();

@@ -35,12 +35,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAllOrigins",
-                    builder => builder.AllowAnyOrigin());
-            });
-            //services.AddSingleton<ICarDal, EfCarDal>();
+  
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -76,7 +71,7 @@ namespace WebApi
             app.UseStaticFiles();
 
 
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("https://249e-88-226-104-109.ngrok.io").AllowAnyHeader());
 
 
             app.UseHttpsRedirection();

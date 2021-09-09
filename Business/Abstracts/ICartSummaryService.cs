@@ -10,6 +10,8 @@ namespace Business.Abstracts
     public interface ICartSummaryService : IServiceRepository<CartSummary>
     {
         IDataResult<List<CartSummaryDto>> GetCartSummaryDetailByUserId(int userId);
+
+        IDataResult<List<CartSummary>> GetAllByUserId(int userId);  
     }
 }
 
