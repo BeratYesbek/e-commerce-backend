@@ -71,7 +71,7 @@ namespace WebApi
             app.UseStaticFiles();
 
 
-            app.UseCors(builder => builder.WithOrigins("https://249e-88-226-104-109.ngrok.io").AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("https://249e-88-226-104-109.ngrok.io", "http://localhost:4200").AllowAnyHeader());
 
 
             app.UseHttpsRedirection();

@@ -39,7 +39,7 @@ namespace Business.Concretes
 
         [CacheRemoveAspect("IServiceRepository.ProductManager.GetById")]
         [ValidationAspect(typeof(ProductValidator))]
-       // [SecuredOperation("Product.Add,admin")]
+        [SecuredOperation("product.update,admin")]
         [PerformanceAspect(3)]
         public IResult Update(Product entity)
         {
@@ -47,7 +47,8 @@ namespace Business.Concretes
             return new SuccessResult(ProductMessages.ProductUpdateSuccessMessage);
         }
 
-        [SecuredOperation("Product.Add,admin")]
+
+        [SecuredOperation("product.delete,admin")]
         [CacheRemoveAspect("IServiceRepository.ProductManager.GetById")]
         [PerformanceAspect(3)]
         public IResult Delete(Product entity)
@@ -66,13 +67,14 @@ namespace Business.Concretes
 
         [CacheAspect]
         [PerformanceAspect(3)]
-        //[SecuredOperation("product.get,admin")]
         public IDataResult<List<Product>> GetAll()
         {
             var result = _productDal.GetAll();
             return new SuccessDataResult<List<Product>>(result);
         }
 
+        [CacheAspect]
+        [PerformanceAspect(3)]
         public IDataResult<List<ProductDto>> GetAllProductDetail()
         {
             var result = _productDal.GetAllProductDetail();
@@ -84,6 +86,8 @@ namespace Business.Concretes
             return new ErrorDataResult<List<ProductDto>>(result);   
         }
 
+        [CacheAspect]
+        [PerformanceAspect(3)]
         public IDataResult<ProductDto> GetProductDetailById(int id)
         {
             var result = _productDal.GetProductDetailById(p => p.ProductId == id);
@@ -94,6 +98,8 @@ namespace Business.Concretes
             return new ErrorDataResult<ProductDto>(null);
         }
 
+        [CacheAspect]
+        [PerformanceAspect(3)]
         public IDataResult<List<ProductDto>> GetProductDetailByCategoryId(int categoryId)
         {
             var result = _productDal.GetAllProductDetail(c => c.CategoryId == categoryId);

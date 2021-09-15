@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add (Payment[] payments)
+        public IActionResult Add (List<Payment> payments)
         {
             
             foreach (var payment in payments)

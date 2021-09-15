@@ -1,6 +1,11 @@
 ﻿using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.CustomBusinessRules;
 using Business.Messages;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results.Abstracts;
 using Core.Utilities.Results.Concretes;
@@ -21,6 +26,10 @@ namespace Business.Concretes
             _paymentDal = paymentDal;   
             _cartSummaryService = cartSummaryService;   
         }
+
+        [CacheRemoveAspect("IServiceRepository.PaymentManager.GetAll")]
+        [ValidationAspect(typeof(PaymentValidation))]
+        [PerformanceAspect(3)]
         public IResult Add(Payment entity)
         {
             _paymentDal.Add(entity);
@@ -36,12 +45,18 @@ namespace Business.Concretes
             return new SuccessResult(PaymentMessages.PaymentAddSuccessMessage);
         }
 
+        [CacheRemoveAspect("IServiceRepository.PaymentManager.GetAll")]
+        [PerformanceAspect(3)]
+        [SecuredOperation("payment.delete,admin")]
         public IResult Delete(Payment entity)
         {
            _paymentDal.Delete(entity);
             return new SuccessResult(PaymentMessages.PaymentDeleteSuccessMessage);  
         }
 
+        [CacheAspect]
+        [PerformanceAspect(3)]
+        [SecuredOperation("payment.delete,admin")]
         public IDataResult<List<Payment>> GetAll()
         {
             var data = _paymentDal.GetAll();
@@ -62,6 +77,10 @@ namespace Business.Concretes
             return new ErrorDataResult<Payment>(null);  
         }
 
+        [ValidationAspect(typeof(PaymentValidation))]
+        [CacheRemoveAspect("IServiceRepository.PaymentManager.GetAll")]
+        [PerformanceAspect(3)]
+        [SecuredOperation("payment.update,admin")]
         public IResult Update(Payment entity)
         {
            _paymentDal.Update(entity);  

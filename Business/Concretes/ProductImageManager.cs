@@ -56,6 +56,7 @@ namespace Business.Concretes
             return new SuccessResult();
         }
 
+
         public IResult Delete(ProductImage entity, IFormFile[] file)
         {
             throw new NotImplementedException();
